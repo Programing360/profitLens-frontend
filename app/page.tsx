@@ -12,6 +12,7 @@ export default function Home() {
     <div className="">
       <Navbar />
       <HeroSection />
+
       <FeaturesSection />
       <HowItWorks />
       <BenefitsSection />

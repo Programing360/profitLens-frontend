@@ -11,11 +11,15 @@ import {
   LoginFormValues,
   loginSchema,
 } from "@/src/lib/validations/auth.schema";
+import { authService } from "@/src/services/auth.service";
+import { useRouter, useSearchParams } from "next/navigation";
+import { authStorage } from "@/src/lib/auth-storage";
 
 export default function LoginForm() {
   const [rememberMe, setRememberMe] = useState(false);
   const [apiError, setApiError] = useState("");
-
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const {
     register,
     handleSubmit,
@@ -28,24 +32,53 @@ export default function LoginForm() {
     },
   });
 
-  const onSubmit = async (data: LoginFormValues) => {
+  const onSubmit = async (values: LoginFormValues) => {
     setApiError("");
 
     try {
-      /*
-       * Backend integration will be added in the next step.
-       * For now, verify that the form and validation work.
-       */
-      console.log("Login form submitted:", {
-        email: data.email,
-        rememberMe,
+      const result = await authService.login({
+        email: values.email.trim(),
+        password: values.password,
       });
 
+      if (!result.success) {
+        throw new Error(result.message || "Login failed.");
+      }
+
+      if (typeof result.token !== "string" || !result.token) {
+        throw new Error("The server did not return an authentication token.");
+      }
+
+      if (!result.user) {
+        throw new Error("The server did not return user information.");
+      }
+
+      // Login সফল। পরবর্তী ধাপে token ও user session
+      authStorage.save(result.token, result?.user);
+
+      // নিরাপদভাবে manage করে dashboard-এ redirect করব.
+
+      if (result.success) {
+        const requestedPath = searchParams.get("next");
+
+        const destination =
+          requestedPath &&
+          requestedPath.startsWith("/") &&
+          !requestedPath.startsWith("//") &&
+          !requestedPath.includes("\\")
+            ? requestedPath
+            : "/dashboard";
+
+        router.replace(destination);
+      }
+
+      console.log("Login successful:", result);
+    } catch (error) {
       setApiError(
-        "Authentication API is not connected yet. We will connect it in the next step.",
+        error instanceof Error
+          ? error.message
+          : "Unable to log in. Please try again.",
       );
-    } catch {
-      setApiError("Something went wrong. Please try again.");
     }
   };
 

@@ -1,11 +1,5 @@
-import React from 'react';
+import OverviewContent from "@/src/components/dashboard/overview-content";
 
-const page = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
-
-export default page;
+export default function DashboardPage() {
+  return <OverviewContent />;
+}

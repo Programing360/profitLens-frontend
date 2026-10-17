@@ -10,10 +10,14 @@ import {
   RegisterFormValues,
   registerSchema,
 } from "@/src/lib/validations/auth.schema";
+import { authService } from "@/src/services/auth.service";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const [apiError, setApiError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+
+  const router = useRouter();
 
   const {
     register,
@@ -23,28 +27,54 @@ export default function RegisterForm() {
     resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
+      businessName: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
   });
 
-  const onSubmit = async (data: RegisterFormValues) => {
+  const onSubmit = async (values: RegisterFormValues) => {
     setApiError("");
     setSuccessMessage("");
 
     try {
-      // Backend API will be connected in the next step.
-      console.log("Registration form submitted:", {
-        name: data.name,
-        email: data.email,
+      const result = await authService.register({
+        name: values.name.trim(),
+        businessName: values.businessName.trim(),
+        email: values.email.trim(),
+        password: values.password,
       });
 
-      setApiError(
-        "Registration API is not connected yet. We will connect it in the next step.",
+      if (!result.success) {
+        throw new Error(result.message || "Registration failed.");
+      }
+
+      console.log(result);
+
+      if (typeof result.token !== "string" || !result.token) {
+        throw new Error(
+          "Account was created, but the server did not return an authentication token.",
+        );
+      }
+
+      setSuccessMessage(
+        "Account created successfully! Redirecting to login...",
       );
-    } catch {
-      setApiError("Something went wrong. Please try again.");
+
+      // পরবর্তী ধাপে login session ও dashboard redirect
+
+      if (result.success) {
+        router.replace("/dashboard");
+      }
+
+      // সঠিকভাবে implement করব।
+    } catch (error) {
+      setApiError(
+        error instanceof Error
+          ? error.message
+          : "Registration failed. Please try again.",
+      );
     }
   };
 
@@ -88,7 +118,32 @@ export default function RegisterForm() {
           </p>
         )}
       </div>
+      <div className="space-y-2">
+        <label
+          htmlFor="businessName"
+          className="block text-sm font-medium text-white"
+        >
+          Business Name
+        </label>
 
+        <input
+          id="businessName"
+          type="text"
+          placeholder="Enter your business name"
+          autoComplete="organization"
+          disabled={isSubmitting}
+          {...register("businessName")}
+          className={`h-12 w-full rounded-xl border bg-[#16092b] px-4 text-sm text-white outline-none placeholder:text-[#76678b] transition-colors focus:border-[#8d59eb] disabled:opacity-50 ${
+            errors.businessName ? "border-red-500" : "border-[#35234f]"
+          }`}
+        />
+
+        {errors.businessName && (
+          <p className="text-xs text-red-400" role="alert">
+            {errors.businessName.message}
+          </p>
+        )}
+      </div>
       {/* Email */}
       <div className="space-y-2">
         <label
