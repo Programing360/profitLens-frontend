@@ -21,9 +21,8 @@ export interface AuthUser {
 export interface AuthResponse {
   success: boolean;
   message: string;
-
-  // Actual backend response দেখার পরে
-  // প্রয়োজন অনুযায়ী token/user properties যোগ করব।
+  token: string;
+  user: AuthUser;
   [key: string]: unknown;
 }
 

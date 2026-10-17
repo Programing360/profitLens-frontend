@@ -25,7 +25,6 @@ export const authStorage = {
   getUser(): StoredUser | null {
     if (typeof window === "undefined") return null;
 
-
     const value = sessionStorage.getItem(USER_KEY);
     if (!value) return null;
 

@@ -8,7 +8,7 @@ interface AOSProviderProps {
 
 export function AOSProvider({ children }: AOSProviderProps) {
   useEffect(() => {
-    let aosInstance: typeof import("aos").default | undefined;
+    let aosInstance: typeof import("aos") | undefined;
 
     const initializeAOS = async () => {
       const AOS = (await import("aos")).default;

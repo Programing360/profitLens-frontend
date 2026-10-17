@@ -21,7 +21,7 @@ export default function DashboardHeader() {
       .toUpperCase() || "U";
 
   return (
-    <header className="flex min-h-20 flex-wrap items-center justify-between gap-4 border-b border-[#35234f] bg-[#0c001f]/90 px-5 py-4 sm:px-8">
+    <header className="flex min-h-20 flex-wrap items-center justify-between gap-4 border-b border-[#35234f] bg-[#0c001f]/90 px-5 py-4 sm:px-8 sticky top-0 w-full">
       <div>
         <p className="text-xs text-[#b9adc9]">Workspace / Overview</p>
 
