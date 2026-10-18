@@ -11,6 +11,7 @@ import {
   Settings,
   LogOut,
   Sparkles,
+  Boxes,
 } from "lucide-react";
 import LogoutButton from "../auth/logout-button";
 
@@ -19,6 +20,16 @@ const navigation = [
     label: "Overview",
     href: "/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    label: "Products",
+    href: "/dashboard/products",
+    icon: Boxes,
+  },
+  {
+    label: "Sales",
+    href: "/dashboard/sales",
+    icon: Boxes,
   },
   {
     label: "Transactions",

@@ -8,7 +8,12 @@ export default function DashboardHeader() {
   const [user, setUser] = useState<StoredUser | null>(null);
 
   useEffect(() => {
-    setUser(authStorage.getUser());
+    try {
+      const storedUser = authStorage.getUser();
+      setUser(storedUser);
+    } catch (error) {
+      console.error("Failed to load products:", error);
+    }
   }, []);
 
   const initials =
