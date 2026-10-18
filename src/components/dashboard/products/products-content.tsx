@@ -74,15 +74,7 @@ export default function ProductsContent() {
   }, []);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        await loadProducts();
-      } catch (error) {
-        console.error("Failed to load products:", error);
-      }
-    };
-
-    void fetchProduct();
+    void loadProducts();
   }, [loadProducts]);
 
   const categories = useMemo(

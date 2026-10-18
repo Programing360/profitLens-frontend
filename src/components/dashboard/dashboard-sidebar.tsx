@@ -37,6 +37,11 @@ const navigation = [
     icon: Boxes,
   },
   {
+    label: "Bussiness Leaks",
+    href: "/dashboard/leaks",
+    icon: Boxes,
+  },
+  {
     label: "Transactions",
     href: "/dashboard/transactions",
     icon: ArrowLeftRight,

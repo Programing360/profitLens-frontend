@@ -1,4 +1,6 @@
 import FinancialsSummary from "./financial-summary";
+import MonthlyAnalyticsChart from "./monthly-analytics-chart";
+import ProductProfitability from "./product-profitability";
 
 export default function OverviewContent() {
   return (
@@ -12,6 +14,8 @@ export default function OverviewContent() {
       </div>
 
       <FinancialsSummary />
+      <MonthlyAnalyticsChart />
+      <ProductProfitability />
     </div>
   );
 }
