@@ -32,6 +32,11 @@ const navigation = [
     icon: Boxes,
   },
   {
+    label: "Expanses",
+    href: "/dashboard/expenses",
+    icon: Boxes,
+  },
+  {
     label: "Transactions",
     href: "/dashboard/transactions",
     icon: ArrowLeftRight,

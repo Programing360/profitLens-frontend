@@ -1,6 +1,5 @@
 import FinancialsSummary from "./financial-summary";
 
-
 export default function OverviewContent() {
   return (
     <div className="space-y-6">

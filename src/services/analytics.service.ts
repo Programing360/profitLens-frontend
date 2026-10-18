@@ -1,5 +1,5 @@
-import { apiClient } from "../lib/api/client";
-import { authStorage } from "../lib/auth-storage";
+import { apiClient } from "@/src/lib/api/client";
+import { authStorage } from "@/src/lib/auth-storage";
 
 export interface FinancialSummary {
   totalRevenue: number;
@@ -29,7 +29,7 @@ export interface ProductAnalytics {
   profitMargin: number;
 }
 
-export interface FinancialAnalyticsResponse {
+export interface AnalyticsResponse {
   success: boolean;
   data: {
     summary: FinancialSummary;
@@ -38,16 +38,48 @@ export interface FinancialAnalyticsResponse {
 }
 
 export const analyticsService = {
-  getFinancialAnalytics: async (): Promise<FinancialAnalyticsResponse> => {
+  async getFinancialAnalytics(): Promise<AnalyticsResponse> {
     const token = authStorage.getToken();
 
     if (!token) {
       throw new Error("Authentication required. Please log in.");
     }
 
-    return apiClient<FinancialAnalyticsResponse>("/analytics", {
+    return apiClient<AnalyticsResponse>("/analytics", {
       method: "GET",
       token,
     });
   },
+};
+
+export interface MonthlyAnalytics {
+  year: number;
+  month: number;
+  monthLabel: string;
+  revenue: number;
+  expenses: number;
+  netProfit: number;
+}
+
+interface MonthlyAnalyticsResponse {
+  success: boolean;
+  data: MonthlyAnalytics[];
+}
+
+export const getMonthlyAnalytics = async (): Promise<MonthlyAnalytics[]> => {
+  const token = authStorage.getToken();
+
+  if (!token) {
+    throw new Error("Authentication required. Please log in.");
+  }
+
+  const response = await apiClient<MonthlyAnalyticsResponse>(
+    "/analytics/monthly",
+    {
+      method: "GET",
+      token,
+    },
+  );
+
+  return response.data;
 };
