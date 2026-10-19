@@ -1,3 +1,4 @@
+import AIBusinessInsights from "./ai/ai-business-insights";
 import FinancialsSummary from "./financial-summary";
 import MonthlyAnalyticsChart from "./monthly-analytics-chart";
 import ProductProfitability from "./product-profitability";
@@ -15,6 +16,7 @@ export default function OverviewContent() {
 
       <FinancialsSummary />
       <MonthlyAnalyticsChart />
+      <AIBusinessInsights />
       <ProductProfitability />
     </div>
   );

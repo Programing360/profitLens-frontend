@@ -29,7 +29,7 @@ const navigation = [
   {
     label: "Sales",
     href: "/dashboard/sales",
-    icon: Boxes,
+    icon: Wallet,
   },
   {
     label: "Expanses",
@@ -39,7 +39,7 @@ const navigation = [
   {
     label: "Bussiness Leaks",
     href: "/dashboard/leaks",
-    icon: Boxes,
+    icon: Building2,
   },
   {
     label: "Transactions",
@@ -55,11 +55,6 @@ const navigation = [
     label: "Analytics",
     href: "/dashboard/analytics",
     icon: ChartNoAxesCombined,
-  },
-  {
-    label: "Business",
-    href: "/dashboard/business",
-    icon: Building2,
   },
   {
     label: "Settings",
