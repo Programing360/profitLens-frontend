@@ -4,7 +4,6 @@ import { useEffect, useState, type ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { authStorage } from "@/src/lib/auth-storage";
 
-
 interface AuthGuardProps {
   children: ReactNode;
 }
@@ -13,12 +12,16 @@ export default function AuthGuard({ children }: AuthGuardProps) {
   const router = useRouter();
   const pathname = usePathname();
 
+  // console.log(pathname);
+
   const [isChecking, setIsChecking] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const token = authStorage.getToken();
     const user = authStorage.getUser();
+
+    // console.log(token, user);
 
     if (!token || !user) {
       authStorage.clear();

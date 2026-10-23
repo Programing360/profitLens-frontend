@@ -12,6 +12,7 @@ import {
 } from "@/src/lib/validations/auth.schema";
 import { authService } from "@/src/services/auth.service";
 import { useRouter } from "next/navigation";
+import { authStorage } from "@/src/lib/auth-storage";
 
 export default function RegisterForm() {
   const [apiError, setApiError] = useState("");
@@ -50,7 +51,7 @@ export default function RegisterForm() {
         throw new Error(result.message || "Registration failed.");
       }
 
-      console.log(result);
+      // console.log(result);
 
       if (typeof result.token !== "string" || !result.token) {
         throw new Error(
@@ -58,15 +59,13 @@ export default function RegisterForm() {
         );
       }
 
-      setSuccessMessage(
-        "Account created successfully! Redirecting to login...",
-      );
+      // Backend থেকে পাওয়া token ও user save
+      authStorage.save(result.token, result.user);
+      setSuccessMessage("Account created successfully");
 
       // পরবর্তী ধাপে login session ও dashboard redirect
-
-      if (result.success) {
-        router.replace("/dashboard");
-      }
+      router.replace("/dashboard");
+      router.refresh();
 
       // সঠিকভাবে implement করব।
     } catch (error) {

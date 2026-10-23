@@ -26,7 +26,7 @@ export function getUser(): AuthUser | null {
   }
 
   const user = localStorage.getItem(USER_KEY);
-  console.log(user);
+  // console.log(user);
 
   if (!user) {
     return null;

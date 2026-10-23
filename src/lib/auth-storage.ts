@@ -9,6 +9,8 @@ export interface StoredUser {
 }
 
 export const authStorage = {
+
+  
   save(token: string, user: StoredUser) {
     if (typeof window === "undefined") return;
 

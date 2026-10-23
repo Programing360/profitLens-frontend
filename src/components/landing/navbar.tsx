@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   Menu,
   X,
-  TrendingUp,
   LayoutDashboard,
   User,
   LogOut,

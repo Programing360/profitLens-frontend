@@ -26,6 +26,12 @@ export interface AuthResponse {
   [key: string]: unknown;
 }
 
+export interface GetMeResponse {
+  success: boolean;
+  message: string;
+  data: AuthUser;
+}
+
 export const authService = {
   register(payload: RegisterPayload) {
     return apiClient<AuthResponse>("/auth/register", {
@@ -43,6 +49,11 @@ export const authService = {
 
   test() {
     return apiClient<AuthResponse>("/auth/test", {
+      method: "GET",
+    });
+  },
+  getMe() {
+    return apiClient<GetMeResponse>("/auth/me", {
       method: "GET",
     });
   },
