@@ -116,7 +116,7 @@ export default function FeaturesSection() {
             Powerful Features
           </span>
 
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-5 text-3xl font-bold tracking-tight text-[#d8f999] sm:text-4xl lg:text-5xl">
             Everything You Need to
             <span className="block text-[#8d59eb]">Understand Your Profit</span>
           </h2>

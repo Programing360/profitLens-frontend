@@ -48,7 +48,7 @@ export default function HowItWorks() {
             Simple Workflow
           </span>
 
-          <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-5 text-3xl font-bold tracking-tight text-[#d8f999] sm:text-4xl lg:text-5xl">
             From Business Data to
             <span className="block text-[#8d59eb]">Smarter Decisions</span>
           </h2>

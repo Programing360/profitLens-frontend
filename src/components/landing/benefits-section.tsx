@@ -78,7 +78,7 @@ export default function BenefitsSection() {
               Why ProfitLens AI?
             </span>
 
-            <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="mt-5 text-3xl font-bold leading-tight tracking-tight text-[#d8f999] sm:text-4xl lg:text-5xl">
               Run Your Business
               <span className="block text-[#8d59eb]">With More Confidence</span>
             </h2>
@@ -111,7 +111,7 @@ export default function BenefitsSection() {
                     </div>
 
                     <div>
-                      <h3 className="font-semibold text-text-primary">
+                      <h3 className="font-semibold text-[#d8f999]">
                         {benefit.title}
                       </h3>
 
@@ -127,14 +127,14 @@ export default function BenefitsSection() {
 
           {/* Right Visual */}
           <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={{ opacity: 0, x: 64 }}
+            whileInView={{ opacity: 2, x: 10 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
             className="relative"
           >
             {/* Decorative Background */}
-            <div className="absolute -inset-5 rounded-[2rem] bg-gradient-to-br from-indigo-100 via-transparent to-emerald-100 blur-2xl dark:from-indigo-950 dark:to-emerald-950" />
+            <div className="absolute -inset-5 rounded-[2rem] blur-2xl dark:from-indigo-950 dark:to-emerald-950" />
 
             <div className="relative rounded-3xl border border-border bg-background p-5 shadow-xl shadow-slate-200/40 dark:shadow-black/20 sm:p-7">
               {/* Header */}

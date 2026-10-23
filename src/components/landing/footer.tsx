@@ -85,7 +85,7 @@ export default function Footer() {
               </div>
 
               <div className="leading-none">
-                <span className="block text-2xl font-extrabold tracking-tight sm:text-3xl">
+                <span className="block text-2xl text-[#d8f999]  font-extrabold tracking-tight sm:text-3xl">
                   ProfitLens
                 </span>
 

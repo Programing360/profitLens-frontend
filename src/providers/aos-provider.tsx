@@ -18,10 +18,10 @@ export function AOSProvider({ children }: AOSProviderProps) {
       aosInstance = AOS;
 
       AOS.init({
-        duration: 600,
-        easing: "ease-out",
+        duration: 800,
         once: true,
-        offset: 80,
+        offset: 100,
+        easing: "ease-in-out",
       });
     };
 

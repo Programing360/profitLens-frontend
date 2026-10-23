@@ -27,7 +27,7 @@ export default function CTASection() {
               <span className="font-bold text-[#240b53]">AI</span>
             </div>
 
-            <h2 className="mt-7 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="mt-7 text-3xl font-bold tracking-tight text-[#d8f999]  sm:text-4xl lg:text-5xl">
               Ready to Understand Your Business Better?
             </h2>
 

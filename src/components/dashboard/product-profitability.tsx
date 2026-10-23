@@ -175,9 +175,9 @@ export default function ProductProfitability() {
         </div>
       ) : (
         <>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto scroll-m-1.5">
             <table className="w-full min-w-[900px] text-left">
-              <thead className="bg-white/[0.02]">
+              <thead className="bg-white/[0.02] sticky top-0">
                 <tr className="text-xs uppercase tracking-wider text-[#b9adc9]">
                   <th className="px-5 py-4 font-medium">Product</th>
                   <th className="px-5 py-4 font-medium">Stock</th>

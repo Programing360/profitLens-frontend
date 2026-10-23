@@ -1,10 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Bell, Search, UserRound } from "lucide-react";
+import { Bell, Menu, Search, UserRound, X } from "lucide-react";
+import { Drawer } from "@heroui/react";
 import { authStorage, StoredUser } from "@/src/lib/auth-storage";
 
-export default function DashboardHeader() {
+interface HeaderProps {
+  isMobileOpen: boolean;
+}
+
+export default function DashboardHeader({ isMobileOpen }: HeaderProps) {
   const [user, setUser] = useState<StoredUser | null>(null);
 
   useEffect(() => {
@@ -12,7 +17,7 @@ export default function DashboardHeader() {
       const storedUser = authStorage.getUser();
       setUser(storedUser);
     } catch (error) {
-      console.error("Failed to load products:", error);
+      console.error("Failed to load user:", error);
     }
   }, []);
 
@@ -26,19 +31,18 @@ export default function DashboardHeader() {
       .toUpperCase() || "U";
 
   return (
-    <header className="flex min-h-20 flex-wrap items-center justify-between gap-4 border-b border-[#35234f] bg-[#0c001f]/90 px-5 py-4 sm:px-8 sticky top-0 w-full">
+    <header className="sticky top-0 z-30 flex min-h-20 w-full flex-wrap items-center justify-between gap-4 border-b border-[#35234f] bg-[#0c001f]/90 px-5 py-4 backdrop-blur sm:px-8">
       <div>
         <p className="text-xs text-[#b9adc9]">Workspace / Overview</p>
-
         <h1 className="mt-1 text-xl font-bold text-white sm:text-2xl">
           Dashboard
         </h1>
       </div>
 
       <div className="flex items-center gap-3">
+        {/* Search Input */}
         <div className="hidden items-center gap-2 rounded-xl border border-[#35234f] bg-[#16092b] px-3 sm:flex">
           <Search size={17} className="text-[#b9adc9]" />
-
           <input
             type="search"
             placeholder="Search..."
@@ -47,6 +51,7 @@ export default function DashboardHeader() {
           />
         </div>
 
+        {/* Notification Button */}
         <button
           type="button"
           aria-label="Notifications"
@@ -55,7 +60,18 @@ export default function DashboardHeader() {
           <Bell size={18} />
         </button>
 
-        <div className="flex items-center gap-3 border-l border-[#35234f] pl-3">
+        {/* Mobile Menu Button - HeroUI Drawer trigger (lg এর নিচে) */}
+        <Drawer.Trigger
+          aria-label={
+            isMobileOpen ? "Close navigation menu" : "Open navigation menu"
+          }
+          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#35234f] text-white transition hover:bg-white/5 lg:hidden"
+        >
+          {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </Drawer.Trigger>
+
+        {/* User Profile Info */}
+        <div className="hidden items-center gap-3 border-l border-[#35234f] pl-3 sm:flex">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#8d59eb]/20 text-sm font-semibold text-[#d8f999]">
             {user ? initials : <UserRound size={18} />}
           </div>
